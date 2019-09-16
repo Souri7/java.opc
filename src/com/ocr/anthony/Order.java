@@ -31,4 +31,9 @@ public class Order {
                 break;
         }
     }
+    /**
+     * Run asking process for a menu.
+     */
+    public void runMenu() {
+    }
     }
