@@ -212,4 +212,32 @@ public class Order {
             }
         } while (responseIsGood == false);
     }
+    /**
+     * Display a question about menu in the standard input, get response and display it
+     */
+    public void askMenu() {
+        String[] menus = {"poulet", "boeuf", "végétarien"};
+        askSomething("menu", menus);
+    }
+
+    /**
+     * Display a question about side in the standard input, get response and display it
+     */
+    public void askSide(boolean allSidesEnable) {
+        if (allSidesEnable) {
+            String[] responsesAllSide = {"légumes frais", "frites", "riz"};
+                askSomething("accompagnement", responsesAllSide);
+        } else {
+            String[] responsesOnlyRice = {"riz", "pas de riz"};
+            askSomething("accompagnement", responsesOnlyRice);
+        }
+    }
+
+    /**
+     * Display a question about drink in the standard input, get response and display it
+     */
+    public void askDrink() {
+        String[] responsesDrink = {"eau plate", "eau gazeuse", "soda"};
+        askSomething("boisson", responsesDrink);
+    }
     }
