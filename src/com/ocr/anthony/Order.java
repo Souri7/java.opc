@@ -155,4 +155,16 @@ public class Order {
                 break;
         }
     }
+    /**
+     * Run asking process for several menus.
+     */
+    public void runMenus() {
+        System.out.println("Combien souhaitez vous commander de menu ?");
+        int menuQuantity = sc.nextInt();
+        int counter = 0;
+        while (counter < menuQuantity) {
+            runMenu();
+            counter = counter + 1;
+        }
+    }
     }
