@@ -161,10 +161,8 @@ public class Order {
     public void runMenus() {
         System.out.println("Combien souhaitez vous commander de menu ?");
         int menuQuantity = sc.nextInt();
-        int counter = 0;
-        while (counter < menuQuantity) {
+        for (int i = 0; i < menuQuantity; i++) {
             runMenu();
-            counter = counter + 1;
         }
     }
     }
