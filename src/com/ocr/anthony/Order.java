@@ -1,5 +1,6 @@
 package com.ocr.anthony;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Order {
@@ -60,7 +61,18 @@ public class Order {
      */
     public void runMenus() {
         System.out.println("Combien souhaitez vous commander de menu ?");
-        int menuQuantity = sc.nextInt();
+        int menuQuantity = -1;
+        boolean responseIsGood;
+        do {
+            try {
+                menuQuantity = sc.nextInt();
+                responseIsGood = true;
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println("Vous devez saisir un nombre, correspondant au nombre de menus souhaités");
+                responseIsGood = false;
+            }
+        } while (!responseIsGood);
         orderSummary = "Résumé de votre commande :%n";
         for (int i = 0; i < menuQuantity; i++) {
             orderSummary += "Menu " + (i + 1) + ":%n";
@@ -167,11 +179,16 @@ public class Order {
         for (int i = 1; i <= responses.length; i++)
             System.out.println(i + " - " + responses[i - 1]);
         System.out.println("Que souhaitez-vous comme " + category + "?");
-        int nbResponse;
+        int nbResponse = 0;
         boolean responseIsGood;
         do {
-            nbResponse = sc.nextInt();
-            responseIsGood = (nbResponse >= 1 && nbResponse <= responses.length);
+            try {
+                nbResponse = sc.nextInt();
+                responseIsGood = (nbResponse >= 1 && nbResponse <= responses.length);
+            } catch (InputMismatchException e) {
+                sc.next();
+                responseIsGood = false;
+            }
             if (responseIsGood) {
                 String choice = "Vous avez choisi comme " + category + " : " + responses[nbResponse - 1];
                 orderSummary += choice + "%n";
@@ -185,7 +202,7 @@ public class Order {
             }
         } while (!responseIsGood);
         return nbResponse;
-    }
+}
 
     /**
      * Display a question about menu in the standard input, get response and display it
