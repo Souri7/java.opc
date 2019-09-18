@@ -39,27 +39,21 @@ public class Order {
      * Run asking process for a menu.
      */
     public void runMenu() {
-        this.displayAvailableMenu();
-        int nbMenu;
-        do {
-            nbMenu = sc.nextInt();
-            this.displaySelectedMenu(nbMenu);
-            switch (nbMenu) {
-                case 1:
-                    askSide(true);
-                    askDrink();
-                    break;
-                case 2:
-                    askSide(true);
-                    break;
-                case 3:
-                    askSide(false);
-                    askDrink();
-                    break;
-            }
-        } while (nbMenu < 1 || nbMenu > 3);
+        int nbMenu = askMenu();
+        switch (nbMenu) {
+            case 1:
+                askSide(true);
+                askDrink();
+                break;
+            case 2:
+                askSide(true);
+                break;
+            case 3:
+                askSide(false);
+                askDrink();
+                break;
+        }
     }
-
     /**
      * Run asking process for several menus.
      */
@@ -161,8 +155,9 @@ public class Order {
      * Display a question about a category in the standard input, get response and display it
      * @param category the category of the question
      * @param responses available responses
+     * @return the number of the selected choice
      */
-    public void askSomething(String category, String[] responses) {
+    public int askSomething(String category, String[] responses) {
         System.out.println("Choix " + category);
         for (int i = 1; i <= responses.length; i++)
             System.out.println(i + " - " + responses[i - 1]);
@@ -182,14 +177,16 @@ public class Order {
                     System.out.println("Vous n'avez pas choisi de " + category + " parmi les choix proposés");
             }
         } while (!responseIsGood);
+        return nbResponse;
     }
 
     /**
      * Display a question about menu in the standard input, get response and display it
+     * @return 
      */
-    public void askMenu() {
+    public int askMenu() {
         String[] menus = {"poulet", "boeuf", "végétarien"};
-        askSomething("menu", menus);
+        return askSomething("menu", menus);
     }
 
     /**

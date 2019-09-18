@@ -249,4 +249,19 @@ public class OrderTest {
         String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
         assertEquals("Vous avez choisi comme boisson : eau plate", output[5]);
     }
+    @Test
+    public void Given_Response2_When_AskAboutCarWithThreeResponses_Then_ReturnNumber2() {
+        System.setIn(new ByteArrayInputStream("5\n2\n".getBytes()));
+        order = new Order();
+        String[] responses = {"BMW", "Audi", "Mercedes"};
+        int choice = order.askSomething("voiture", responses);
+        assertEquals(2, choice);
+    }
+    @Test
+    public void Given_Chiken_When_AskAboutMenus_Then_Return1() {
+        System.setIn(new ByteArrayInputStream("1\n".getBytes()));
+        order = new Order();
+        int choice = order.askMenu();
+        assertEquals(1, choice);
+    }
 }
