@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Order {
     Scanner sc = new Scanner(System.in);
+	String orderSummary = "";
 
     /**
      * Display all available menus in the restaurant.
@@ -58,11 +59,15 @@ public class Order {
      * Run asking process for several menus.
      */
     public void runMenus() {
-        System.out.println("Combien de menus souhaitez-vous commander ?");
+        System.out.println("Combien souhaitez vous commander de menu ?");
         int menuQuantity = sc.nextInt();
+        orderSummary = "Résumé de votre commande :%n";
         for (int i = 0; i < menuQuantity; i++) {
+            orderSummary += "Menu " + (i + 1) + ":%n";
             runMenu();
         }
+        System.out.println("");
+        System.out.println(String.format(orderSummary));
     }
     /**
      * Display a selected side depending on all sides enable or not.
@@ -167,14 +172,16 @@ public class Order {
         do {
             nbResponse = sc.nextInt();
             responseIsGood = (nbResponse >= 1 && nbResponse <= responses.length);
-            if (responseIsGood)
-                System.out.println("Vous avez choisi comme " + category + " : " + responses[nbResponse - 1]);
-            else {
+            if (responseIsGood) {
+                String choice = "Vous avez choisi comme " + category + " : " + responses[nbResponse - 1];
+                orderSummary += choice + "%n";
+                System.out.println(choice);
+            } else {
                 boolean isVowel = "aeiouy".contains(Character.toString(category.charAt(0)));
                 if (isVowel)
-                    System.out.println("Vous n'avez pas choisi d'" + category + " parmi les choix proposÃ©s");
+                    System.out.println("Vous n'avez pas choisi d'" + category + " parmi les choix proposés");
                 else
-                    System.out.println("Vous n'avez pas choisi de " + category + " parmi les choix proposÃ©s");
+                    System.out.println("Vous n'avez pas choisi de " + category + " parmi les choix proposés");
             }
         } while (!responseIsGood);
         return nbResponse;
